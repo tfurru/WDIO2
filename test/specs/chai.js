@@ -1,40 +1,37 @@
-import { expect as chaiExpect, assert } from 'chai';
-import 'chai/register-should';
-
 xdescribe('Watches Page', () => {
-  it('should show the banner container', () => {
-    browser.url(
-      'https://www.ebay.com/b/Watches-Parts-Accessories/260324/bn_2408535'
-    );
-    const promoBanner = $('section.b-promobanner');
-    expect(promoBanner).toBeDisplayed();
-  });
+    it('Should show the banner container', () => {
+        browser.url(
+            'https://www.ebay.com/b/Watches-Parts-Accessories/260324/bn_2408535'
+        );
+        const promoBanner = $('#mainContent > section.b-module.b-promobanner.clearfix._FCF2BD5C1B05.d1img70');
+        expect(promoBanner).toBeDisplayed();
+    });   
 
-  it('should show the banner title', () => {
-    const infoTitle = $('.b-promobanner__info-title');
-    const infoTitleText = infoTitle.getText();
+    it('Should show the banner title', () => {        
+        const infoTitle = $('#mainContent > section.b-module.b-promobanner.clearfix._FCF2BD5C1B05.d1img70 > div.b-promobanner__info > h2');
+        const infoTitleText = infoTitle.getText();
 
-    expect(infoTitle).toHaveTextContaining('watches');
-    chaiExpect(infoTitleText).to.not.be.empty;
-    infoTitle.should.not.be.empty;
-    // assert.isEmpty(infoTitleText);
-  });
+        expect(infoTitle).toHaveTextContaining('Up to', 'off Rolex');
+        chaiExpect(infoTitleText).to.not.be.empty;
+        infoTitleText.should.not.be.empty;
+        assert.isNotEmpty(infoTitleText);
+    });
 
-  it('should contain link on banner button and verify its clickable', () => {
-    const shopButton = $('.b-promobanner__info-btn');
-    const tag = shopButton.getTagName();
+    it('Should contain link on banner button and verify it is clickable', () => {
+        const shopButton = $('#mainContent > section.b-module.b-promobanner.clearfix._FCF2BD5C1B05.d1img70 > div.b-promobanner__info > a');
+        const tag = shopButton.getTagName();
 
-    expect(shopButton).toHaveLinkContaining('/fashion/');
-    expect(shopButton).toBeClickable();
-    chaiExpect(tag).to.equal('a');
-    tag.should.be.equal('a');
-  });
+        expect(shopButton).toHaveLinkContaining('/fashion/');
+        expect(shopButton).toBeClickable();
+        chaiExpect(tag).to.equal('a');
+        tag.should.be.equal('a');
+    });
 
-  it('should click on the shop button and verify the new url', () => {
-    const shopButton = $('.b-promobanner__info-btn');
-    shopButton.click();
+    it('Should click on the shop button and verify the new url', () => {
+        const shopButton = $('#mainContent > section.b-module.b-promobanner.clearfix._FCF2BD5C1B05.d1img70 > div.b-promobanner__info > a');
+        shopButton.click();
 
-    const url = browser.getUrl();
-    chaiExpect(url).to.include('/fashion/');
-  });
+        const url = browser.getUrl();
+        chaiExpect(url).to.include('/fashion/');
+    });
 });
