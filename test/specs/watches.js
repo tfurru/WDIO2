@@ -1,39 +1,38 @@
-import { expect as chaiExpect } from 'chai';
 import WatchesPage from '../pages/watches.page';
-import { waitAndClick } from '../utilities/helper';
 import resources from '../resources';
+import { waitAndClick } from '../utilities/helper';
 
 describe('Watches Page', () => {
-  before(() => {
-    WatchesPage.open();
-    WatchesPage.fashionLink.moveTo();
-    // browser.pause(1000); // Implicit Wait
-    waitAndClick(WatchesPage.watchesLink, 10000);
-  });
+    before(() => {
+        WatchesPage.open();
+        WatchesPage.fashionLink.moveTo();
+        waitAndClick(WatchesPage.watchesLink, 5000);
+        WatchesPage.watchesHeader.waitForDisplayed({ timeout: 2000 });
+    });
 
-  it('should verify the watches category list', () => {
-    const watchesCategoryList = WatchesPage.getWatchesCategoryListText();
-    chaiExpect(watchesCategoryList).to.deep.equal(
-      resources.watchesCategoryList
-    );
-  });
+    it('Should verify the watches category list', () => {
+        const watchesCategoryList = WatchesPage.getWatchesCategoryListText();
+        chaiExpect(watchesCategoryList).to.deep.equal(
+            resources.watchesCategoryList
+        );            
+    });
 
-  it('should show the banner container', () => {
-    expect(WatchesPage.promoBanner).toBeDisplayed();
-  });
+    it('Should show the banner container', () => {        
+        expect(WatchesPage.promoBanner).toBeDisplayed();
+    });   
 
-  it('should show the banner title', () => {
-    expect(WatchesPage.infoTitle).toHaveTextContaining('shoes');
-  });
+    it('Should show the banner title', () => {        
+        expect(WatchesPage.infoTitle).toHaveTextContaining('Up to', 'off Rolex');
+    });
 
-  it('should contain link on banner button and verify its clickable', () => {
-    expect(WatchesPage.shopButton).toHaveLinkContaining('/fashion/');
-    expect(WatchesPage.shopButton).toBeClickable();
-  });
+    it('Should contain link on banner button and verify it is clickable', () => {
+        expect(WatchesPage.shopButton).toHaveLinkContaining('/fashion/');
+        expect(WatchesPage.shopButton).toBeClickable;
+    });
 
-  it('should click on the shop button and verify the new url', () => {
-    WatchesPage.shopButton.click();
-    const url = browser.getUrl();
-    chaiExpect(url).to.include('/fashion/');
-  });
+    it('Should click on the shop button and verify the new url', () => {
+        WatchesPage.shopButton.click();
+            const url = browser.getUrl();
+            chaiExpect(url).to.include('/fashion/');
+    });
 });
