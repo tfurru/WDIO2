@@ -149,7 +149,7 @@ exports.config = {
         {
         	outputDir: './report',
 		outputFIleFormat: function (options) {
-	     		return 'results-${mewDate().getTime()}.xml';
+	     		return 'results-${new Date().getTime()}.xml';
 		},
     	 },
 	
