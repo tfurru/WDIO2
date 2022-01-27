@@ -67,7 +67,10 @@ exports.config = {
         maxInstances: 5,
         browserName: 'firefox',
     },
-    
+    {
+        maxInstances: 5,
+        browserName: 'MicrosoftEdge',
+    }
 ],
     //
     // ===================
@@ -143,13 +146,16 @@ exports.config = {
             'allure', 
             {
         outputDir: 'allure-results',
-    },
-    ], 
-        ['junit', 
+        },
+        ], 
+        [
+            'junit', 
         {
-          outputDir: './report',		
-    	 },
-	
+        	outputDir: './report',
+            outputFileFormat: function (options) {
+                return `results-${new Date().getTime()}.xml`;
+            },
+        },
     ],
 ],
 
